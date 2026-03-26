@@ -110,6 +110,21 @@ export default function AdminPage() {
     fetchData(); // refresh
   };
 
+  // Fotoğraf linki sil
+  const removePhotoLink = async (id, currentPhotos, linkToRemove) => {
+    if (confirm('Bu fotoğrafı silmek istediğinize emin misiniz?')) {
+      const updatedPhotos = currentPhotos.filter(link => link !== linkToRemove);
+      const newStatus = updatedPhotos.length === 0 ? 'pending' : 'completed';
+      
+      await supabase
+        .from('photo_requests')
+        .update({ photos: updatedPhotos, status: newStatus })
+        .eq('id', id);
+        
+      fetchData();
+    }
+  };
+
   // Düzenleme linki ekle
   const addResultLink = async (id, currentPhotos, newLink) => {
     if (!newLink) return;
@@ -121,6 +136,21 @@ export default function AdminPage() {
       .eq('id', id);
     
     fetchData(); // refresh
+  };
+
+  // Düzenleme linki sil
+  const removeResultLink = async (id, currentPhotos, linkToRemove) => {
+    if (confirm('Bu fotoğrafı silmek istediğinize emin misiniz?')) {
+      const updatedPhotos = currentPhotos.filter(link => link !== linkToRemove);
+      const newStatus = updatedPhotos.length === 0 ? 'pending' : 'completed';
+      
+      await supabase
+        .from('editing_requests')
+        .update({ result_photos: updatedPhotos, status: newStatus })
+        .eq('id', id);
+        
+      fetchData();
+    }
   };
 
   // Portföy öğesi ekle
@@ -254,15 +284,26 @@ export default function AdminPage() {
                       <div className="admin-label">Yüklenen Fotoğraflar:</div>
                       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(80px, 1fr))', gap: '12px' }}>
                         {req.photos.map((link, i) => (
-                          <a 
-                            key={i} 
-                            href={link} 
-                            target="_blank" 
-                            rel="noreferrer"
-                            style={{ display: 'block', width: '100%', aspectRatio: '1', borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--border)' }}
-                          >
-                            <img src={link} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                          </a>
+                          <div key={i} style={{ position: 'relative' }}>
+                            <a 
+                              href={link} 
+                              target="_blank" 
+                              rel="noreferrer"
+                              style={{ display: 'block', width: '100%', aspectRatio: '1', borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--border)' }}
+                            >
+                              <img src={link} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                            </a>
+                            <button
+                              type="button"
+                              onClick={() => removePhotoLink(req.id, req.photos, link)}
+                              style={{
+                                position: 'absolute', top: -6, right: -6, background: '#D70015', color: '#fff', border: 'none',
+                                borderRadius: '50%', width: 20, height: 20, cursor: 'pointer', display: 'flex',
+                                alignItems: 'center', justifyContent: 'center', fontSize: 14, fontWeight: 'bold'
+                              }}
+                              title="Sil"
+                            >×</button>
+                          </div>
                         ))}
                       </div>
                     </div>
@@ -316,15 +357,26 @@ export default function AdminPage() {
                       <div className="admin-label">Sonuç Fotoğrafları:</div>
                       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(80px, 1fr))', gap: '12px' }}>
                         {req.result_photos.map((link, i) => (
-                          <a 
-                            key={i} 
-                            href={link} 
-                            target="_blank" 
-                            rel="noreferrer"
-                            style={{ display: 'block', width: '100%', aspectRatio: '1', borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--border)' }}
-                          >
-                            <img src={link} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                          </a>
+                          <div key={i} style={{ position: 'relative' }}>
+                            <a 
+                              href={link} 
+                              target="_blank" 
+                              rel="noreferrer"
+                              style={{ display: 'block', width: '100%', aspectRatio: '1', borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--border)' }}
+                            >
+                              <img src={link} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                            </a>
+                            <button
+                              type="button"
+                              onClick={() => removeResultLink(req.id, req.result_photos, link)}
+                              style={{
+                                position: 'absolute', top: -6, right: -6, background: '#D70015', color: '#fff', border: 'none',
+                                borderRadius: '50%', width: 20, height: 20, cursor: 'pointer', display: 'flex',
+                                alignItems: 'center', justifyContent: 'center', fontSize: 14, fontWeight: 'bold'
+                              }}
+                              title="Sil"
+                            >×</button>
+                          </div>
                         ))}
                       </div>
                     </div>

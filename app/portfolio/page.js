@@ -23,21 +23,35 @@ export default function PortfolioPage() {
     };
 
     fetchItems();
-    
-    // Smooth reveal effect on load
-    const timer = setTimeout(() => {
-      document.querySelectorAll('.reveal-on-load').forEach(el => el.classList.add('visible'));
-    }, 100);
-    
-    return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (loading) return;
+    
+    // Smooth reveal effect on load after data loads
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    revealElements.forEach((el) => revealObserver.observe(el));
+    
+    return () => revealObserver.disconnect();
+  }, [loading, portfolioItems]);
 
   return (
     <>
       <Navbar />
       
       <main className="portfolio-page">
-        <header className="portfolio-header-container reveal-on-load reveal" style={{ opacity: 0, transform: 'translateY(20px)', transition: 'all 0.8s ease' }}>
+        <header className="portfolio-header-container reveal">
           <h1 className="portfolio-hero-title">Tüm Çalışmalar</h1>
           <p className="portfolio-hero-subtitle">
             Stüdyomuzda çekilmiş, düzenlenmiş ve dijitalleştirilmiş tüm kareler bir arada. 
@@ -58,12 +72,7 @@ export default function PortfolioPage() {
                   href={item.image_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="portfolio-masonry-item reveal-on-load reveal"
-                  style={{
-                    opacity: 0, 
-                    transform: 'translateY(20px)', 
-                    transition: `all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) ${i * 0.05}s`
-                  }}
+                  className="portfolio-masonry-item reveal"
                 >
                   <img src={item.image_url} alt={item.title || 'Portföy'} loading="lazy" />
                   <div className="portfolio-masonry-overlay">
