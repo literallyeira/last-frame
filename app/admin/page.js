@@ -220,9 +220,7 @@ export default function AdminPage() {
     <div className="admin-layout">
       {/* SIDEBAR */}
       <aside className="admin-sidebar">
-        <div className="admin-brand" style={{ display: 'flex', alignItems: 'center', marginBottom: '48px', paddingLeft: '12px' }}>
-          <img src="/logo.png" alt="LF Studio Admin" style={{ height: '40px', width: 'auto' }} />
-        </div>
+        <div className="admin-brand">LF Studio Admin</div>
         <nav className="admin-nav">
           <button
             className={`admin-nav-item ${activeTab === 'photos' ? 'active' : ''}`}
