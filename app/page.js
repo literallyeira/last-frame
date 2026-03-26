@@ -64,28 +64,31 @@ export default function Home() {
       <Navbar />
       <Hero />
 
-      {/* Parallax divider */}
-      <div className="parallax-divider">
-        <div className="parallax-divider-inner">
-          CAPTURE &nbsp; · &nbsp; CREATE &nbsp; · &nbsp; DELIVER &nbsp; · &nbsp; CAPTURE &nbsp; · &nbsp; CREATE
+      {/* Marquee divider */}
+      <div className="marquee-divider">
+        <div className="marquee-track">
+          <span>CAPTURE &nbsp; · &nbsp; CREATE &nbsp; · &nbsp; DELIVER &nbsp; · &nbsp; CAPTURE &nbsp; · &nbsp; CREATE &nbsp; · &nbsp; DELIVER &nbsp; · &nbsp;</span>
+          <span>CAPTURE &nbsp; · &nbsp; CREATE &nbsp; · &nbsp; DELIVER &nbsp; · &nbsp; CAPTURE &nbsp; · &nbsp; CREATE &nbsp; · &nbsp; DELIVER &nbsp; · &nbsp;</span>
         </div>
       </div>
 
       <PhotoRequestForm />
 
-      {/* Parallax divider */}
-      <div className="parallax-divider">
-        <div className="parallax-divider-inner">
-          EDIT &nbsp; · &nbsp; ENHANCE &nbsp; · &nbsp; TRANSFORM &nbsp; · &nbsp; EDIT &nbsp; · &nbsp; ENHANCE
+      {/* Marquee divider */}
+      <div className="marquee-divider">
+        <div className="marquee-track">
+          <span>EDIT &nbsp; · &nbsp; ENHANCE &nbsp; · &nbsp; TRANSFORM &nbsp; · &nbsp; EDIT &nbsp; · &nbsp; ENHANCE &nbsp; · &nbsp; TRANSFORM &nbsp; · &nbsp;</span>
+          <span>EDIT &nbsp; · &nbsp; ENHANCE &nbsp; · &nbsp; TRANSFORM &nbsp; · &nbsp; EDIT &nbsp; · &nbsp; ENHANCE &nbsp; · &nbsp; TRANSFORM &nbsp; · &nbsp;</span>
         </div>
       </div>
 
       <EditingRequestForm />
 
-      {/* Parallax divider */}
-      <div className="parallax-divider">
-        <div className="parallax-divider-inner">
-          CONNECT &nbsp; · &nbsp; COLLABORATE &nbsp; · &nbsp; INSPIRE &nbsp; · &nbsp; CONNECT
+      {/* Marquee divider */}
+      <div className="marquee-divider">
+        <div className="marquee-track">
+          <span>CONNECT &nbsp; · &nbsp; COLLABORATE &nbsp; · &nbsp; INSPIRE &nbsp; · &nbsp; CONNECT &nbsp; · &nbsp; COLLABORATE &nbsp; · &nbsp; INSPIRE &nbsp; · &nbsp;</span>
+          <span>CONNECT &nbsp; · &nbsp; COLLABORATE &nbsp; · &nbsp; INSPIRE &nbsp; · &nbsp; CONNECT &nbsp; · &nbsp; COLLABORATE &nbsp; · &nbsp; INSPIRE &nbsp; · &nbsp;</span>
         </div>
       </div>
 

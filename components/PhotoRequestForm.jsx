@@ -26,13 +26,13 @@ export default function PhotoRequestForm() {
       supabase
         .from('photo_requests')
         .select('id')
-        .eq('full_name', fullName.trim())
+        .ilike('full_name', fullName.trim())
         .eq('phone', phone.trim())
         .limit(1),
       supabase
         .from('editing_requests')
         .select('id')
-        .eq('full_name', fullName.trim())
+        .ilike('full_name', fullName.trim())
         .eq('phone', phone.trim())
         .limit(1)
     ]);

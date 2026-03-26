@@ -30,13 +30,13 @@ function MyPhotosContent() {
           supabase
             .from('photo_requests')
             .select('*')
-            .eq('full_name', name)
+            .ilike('full_name', name)
             .eq('phone', phone)
             .order('created_at', { ascending: false }),
           supabase
             .from('editing_requests')
             .select('*')
-            .eq('full_name', name)
+            .ilike('full_name', name)
             .eq('phone', phone)
             .order('created_at', { ascending: false }),
           supabase
@@ -126,6 +126,13 @@ function MyPhotosContent() {
         {isPendingPhotos && allPhotos.length === 0 && (
           <div className="status-notice info">
             <p>Çekim fotoğraflarınız henüz hazırlanıyor. Tamamlandığında burada görünecektir.</p>
+          </div>
+        )}
+
+        {/* Info notice about editing tickets */}
+        {editingRequests.length > 0 && allPhotos.length > 0 && (
+          <div className="status-notice info" style={{ marginTop: '16px' }}>
+            <p>Düzenleme talepleriniz ve yanıtları sayfanın aşağısında yer almaktadır. ↓</p>
           </div>
         )}
 
