@@ -21,36 +21,71 @@ export default function PhotoRequestForm() {
     setMessage(null);
     setPhotos(null);
 
-    // Check if a request already exists for this name + phone
-    const { data: existing, error: selectError } = await supabase
-      .from('photo_requests')
-      .select('*')
-      .eq('full_name', fullName.trim())
-      .eq('phone', phone.trim())
-      .order('created_at', { ascending: false })
-      .limit(1);
+    // Fetch both photo requests and editing requests in parallel
+    const [photoData, editingData] = await Promise.all([
+      supabase
+        .from('photo_requests')
+        .select('*')
+        .eq('full_name', fullName.trim())
+        .eq('phone', phone.trim())
+        .order('created_at', { ascending: false }),
+      supabase
+        .from('editing_requests')
+        .select('*')
+        .eq('full_name', fullName.trim())
+        .eq('phone', phone.trim())
+        .order('created_at', { ascending: false })
+    ]);
 
-    if (selectError) {
+    if (photoData.error || editingData.error) {
       setLoading(false);
       setMessage({ type: 'error', text: 'Bir hata oluştu. Lütfen tekrar deneyin.' });
       return;
     }
 
-    if (existing && existing.length > 0) {
-      const req = existing[0];
-      if (req.photos && req.photos.length > 0) {
-        // Photos are ready
-        setPhotos(req.photos);
-        setMessage({ type: 'success', text: 'Fotoğraflarınız hazır!' });
-      } else {
-        // Request exists but photos not yet uploaded
-        setMessage({
-          type: 'info',
-          text: 'Fotoğraflarınız hazırlanıyor... En kısa sürede yüklenecek.',
-        });
-      }
+    const allPhotos = [];
+    let hasAnyRequest = false;
+    let isPreparing = false;
+
+    // Process photo requests
+    if (photoData.data && photoData.data.length > 0) {
+      hasAnyRequest = true;
+      photoData.data.forEach(req => {
+        if (req.photos && req.photos.length > 0) {
+          allPhotos.push(...req.photos);
+        } else {
+          isPreparing = true;
+        }
+      });
+    }
+
+    // Process editing requests
+    if (editingData.data && editingData.data.length > 0) {
+      hasAnyRequest = true;
+      editingData.data.forEach(req => {
+        if (req.result_photos && req.result_photos.length > 0) {
+          allPhotos.push(...req.result_photos);
+        } else {
+          isPreparing = true;
+        }
+      });
+    }
+
+    if (allPhotos.length > 0) {
+      setPhotos(allPhotos);
+      setMessage({ 
+        type: 'success', 
+        text: isPreparing 
+          ? 'Bazı fotoğraflarınız hazır, diğerleri hazırlanıyor!' 
+          : 'Tüm fotoğraflarınız hazır!' 
+      });
+    } else if (hasAnyRequest) {
+      setMessage({
+        type: 'info',
+        text: 'Talebiniz bulundu, ancak fotoğraflarınız henüz hazırlanıyor... En kısa sürede yüklenecek.',
+      });
     } else {
-      // No existing request — create one
+      // No existing request found at all — create a new Photo Request
       const { error: insertError } = await supabase
         .from('photo_requests')
         .insert([{ full_name: fullName.trim(), phone: phone.trim() }]);
