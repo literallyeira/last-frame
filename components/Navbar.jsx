@@ -8,8 +8,8 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
-      <Link href="/" className="navbar-logo">
-        Last Frame <span>Studio</span>
+      <Link href="/" className="navbar-logo" style={{ display: 'flex', alignItems: 'center' }}>
+        <img src="/logo.png" alt="Last Frame Studio" style={{ height: '40px', width: 'auto' }} />
       </Link>
 
       <button
