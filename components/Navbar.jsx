@@ -9,7 +9,7 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <Link href="/" className="navbar-logo">
-        Last Frame <span>Studio</span>
+        <img src="/logo.png" alt="Last Frame Studio Logo" className="logo-img" />
       </Link>
 
       <button
