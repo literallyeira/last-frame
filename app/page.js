@@ -3,7 +3,6 @@
 import { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import Portfolio from '@/components/Portfolio';
 import PhotoRequestForm from '@/components/PhotoRequestForm';
 import EditingRequestForm from '@/components/EditingRequestForm';
 import ContactForm from '@/components/ContactForm';
@@ -28,6 +27,7 @@ export default function Home() {
     /* ===== Parallax on scroll ===== */
     const parallaxItems = document.querySelectorAll('.parallax-divider-inner');
     const heroContent = document.querySelector('.hero-content');
+    const heroPortfolio = document.querySelector('.hero-portfolio-grid');
 
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -36,6 +36,10 @@ export default function Home() {
       if (heroContent) {
         heroContent.style.transform = `translateY(${scrollY * 0.3}px)`;
         heroContent.style.opacity = Math.max(1 - scrollY / 600, 0);
+      }
+      
+      if (heroPortfolio) {
+        heroPortfolio.style.transform = `translateY(${scrollY * 0.15}px)`;
       }
 
       // Divider text parallax
@@ -59,8 +63,6 @@ export default function Home() {
     <>
       <Navbar />
       <Hero />
-
-      <Portfolio />
 
       {/* Parallax divider */}
       <div className="parallax-divider">

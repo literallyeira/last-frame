@@ -112,11 +112,22 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   justify-content: center;
   padding: 120px 48px 80px;
   position: relative;
   overflow: hidden;
+}
+
+.hero-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-bg {
@@ -147,8 +158,7 @@ body {
 .hero-content {
   position: relative;
   z-index: 1;
-  max-width: 800px;
-  padding-left: 5%;
+  max-width: 600px;
 }
 
 .hero-badge {
@@ -465,60 +475,60 @@ body {
   transform: scale(1.05);
 }
 
-/* ========== MASONRY PORTFOLIO ========== */
-.masonry-grid {
-  columns: 3;
-  column-gap: 16px;
+/* ========== HERO PORTFOLIO MASONRY ========== */
+.hero-portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  position: relative;
+  height: 600px;
 }
 
-.masonry-item {
-  display: block;
-  break-inside: avoid;
-  margin-bottom: 16px;
-  border-radius: 12px;
+.hero-portfolio-item {
+  border-radius: 16px;
   overflow: hidden;
   position: relative;
-  cursor: pointer;
-}
-
-.masonry-item img {
-  width: 100%;
   display: block;
-  transition: transform 0.5s ease;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
 }
 
-.masonry-item:hover img {
-  transform: scale(1.04);
+.hero-portfolio-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-.masonry-overlay {
+.hero-portfolio-item:hover img {
+  transform: scale(1.05);
+}
+
+.hero-portfolio-item.tall {
+  grid-row: span 2;
+}
+
+.hero-portfolio-item.push-down {
+  margin-top: 40px;
+}
+
+.hero-portfolio-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+  background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 60%);
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 20px;
+  align-items: flex-end;
+  padding: 24px;
   opacity: 0;
   transition: opacity 0.4s ease;
 }
 
-.masonry-item:hover .masonry-overlay { opacity: 1; }
+.hero-portfolio-item:hover .hero-portfolio-overlay { opacity: 1; }
 
-.masonry-title {
+.hero-portfolio-overlay span {
   color: #fff;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
-  letter-spacing: -0.3px;
-}
-
-.masonry-category {
-  color: rgba(255,255,255,0.7);
-  font-size: 12px;
-  font-weight: 500;
   letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-top: 4px;
 }
 
 /* ========== PARALLAX DIVIDERS ========== */
@@ -579,6 +589,16 @@ body {
 
 /* ========== RESPONSIVE ========== */
 @media (max-width: 900px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .hero-portfolio-grid {
+    height: 400px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .section-split {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -590,8 +610,6 @@ body {
     position: static;
     padding-top: 0;
   }
-
-  .masonry-grid { columns: 2; }
 }
 
 @media (max-width: 768px) {
