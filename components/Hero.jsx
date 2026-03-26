@@ -23,7 +23,7 @@ export default function Hero() {
     if (portfolioItems.length <= 3) return;
     const interval = setInterval(() => {
       setStartIndex((prev) => (prev + 3) % portfolioItems.length);
-    }, 3000);
+    }, 7000);
     return () => clearInterval(interval);
   }, [portfolioItems.length]);
 
