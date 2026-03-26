@@ -80,6 +80,12 @@ CREATE POLICY "anon_select_contact_messages" ON contact_messages FOR SELECT TO a
 CREATE POLICY "anon_update_photo_requests" ON photo_requests FOR UPDATE TO anon USING (true) WITH CHECK (true);
 CREATE POLICY "anon_update_editing_requests" ON editing_requests FOR UPDATE TO anon USING (true) WITH CHECK (true);
 
+-- Anon DELETE (admin panel silme işlemleri için)
+CREATE POLICY "anon_delete_photo_requests" ON photo_requests FOR DELETE TO anon USING (true);
+CREATE POLICY "anon_delete_editing_requests" ON editing_requests FOR DELETE TO anon USING (true);
+CREATE POLICY "anon_delete_editing_responses" ON editing_responses FOR DELETE TO anon USING (true);
+CREATE POLICY "anon_delete_contact_messages" ON contact_messages FOR DELETE TO anon USING (true);
+
 -- Portfolio: herkes okuyabilir, admin ekleyip silebilir (anon key)
 CREATE POLICY "anon_select_portfolio" ON portfolio_items FOR SELECT TO anon USING (true);
 CREATE POLICY "anon_insert_portfolio" ON portfolio_items FOR INSERT TO anon WITH CHECK (true);
