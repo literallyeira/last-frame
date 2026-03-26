@@ -4,6 +4,9 @@ export const metadata = {
   title: "Last Frame Studio | Profesyonel Fotoğraf Hizmetleri",
   description:
     "Last Frame Studio — Fotoğraf galerisi, düzenleme ve destek hizmetleri. Anılarınızı en güzel haliyle saklayın.",
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export default function RootLayout({ children }) {
