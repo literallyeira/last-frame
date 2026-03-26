@@ -1203,3 +1203,10 @@ body {
     columns: 1;
   }
 }
+.fade-in-image {
+  animation: fade-in-kf 1s ease-in-out;
+}
+@keyframes fade-in-kf {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

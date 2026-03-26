@@ -5,19 +5,34 @@ import { supabase } from '@/lib/supabase';
 
 export default function Hero() {
   const [portfolioItems, setPortfolioItems] = useState([]);
+  const [startIndex, setStartIndex] = useState(0);
 
   useEffect(() => {
     const fetchItems = async () => {
-      // Get the top 6 items for the hero masonry grid
+      // Get all portfolio items for the hero crossfade pool
       const { data } = await supabase
         .from('portfolio_items')
         .select('*')
-        .order('display_order', { ascending: true })
-        .limit(6);
+        .order('display_order', { ascending: true });
       if (data) setPortfolioItems(data);
     };
     fetchItems();
   }, []);
+
+  useEffect(() => {
+    if (portfolioItems.length <= 3) return;
+    const interval = setInterval(() => {
+      setStartIndex((prev) => (prev + 3) % portfolioItems.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [portfolioItems.length]);
+
+  const visibleItems = [];
+  if (portfolioItems.length > 0) {
+    for (let i = 0; i < Math.min(3, portfolioItems.length); i++) {
+      visibleItems.push(portfolioItems[(startIndex + i) % portfolioItems.length]);
+    }
+  }
 
   return (
     <section className="hero">
@@ -58,9 +73,9 @@ export default function Hero() {
         </div>
 
         {/* Sağ Taraf: Masonry Grid (Portföy) */}
-        {portfolioItems.length > 0 && (
+        {visibleItems.length > 0 && (
           <div className="hero-portfolio-grid">
-            {portfolioItems.map((item, i) => (
+            {visibleItems.map((item, i) => (
               <a
                 key={item.id}
                 href={item.image_url}
@@ -68,7 +83,7 @@ export default function Hero() {
                 rel="noopener noreferrer"
                 className={`hero-portfolio-item ${i % 3 === 0 ? 'tall' : ''} ${i === 1 ? 'push-down' : ''}`}
               >
-                <img src={item.image_url} alt={item.title || 'Portföy'} loading="lazy" />
+                <img key={item.id} src={item.image_url} alt={item.title || 'Portföy'} loading="lazy" className="fade-in-image" />
                 <div className="hero-portfolio-overlay">
                   {item.title && <span>{item.title}</span>}
                 </div>
