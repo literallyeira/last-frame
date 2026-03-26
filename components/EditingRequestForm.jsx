@@ -51,76 +51,79 @@ export default function EditingRequestForm() {
   return (
     <section id="duzenleme" className="section">
       <div className="section-container">
-        <div className="section-header reveal">
-          <span className="section-label">Düzenleme & Destek</span>
-          <h2 className="section-title">Fotoğraflarınızı<br />Dönüştürün</h2>
-          <p className="section-subtitle">
-            Arka plan değişimi, renk düzeltme, yapay zeka destekli iyileştirme ve daha fazlası.
-          </p>
-        </div>
-
-        <form className="form-card reveal" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label className="form-label" htmlFor="edit-name">Ad Soyad</label>
-            <input
-              id="edit-name"
-              className="form-input"
-              type="text"
-              placeholder="Adınız ve soyadınız"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-            />
+        <div className="section-split reverse reveal">
+          <div className="section-text-side">
+            <span className="section-label">Düzenleme & Destek</span>
+            <h2 className="section-title">Fotoğraflarınızı<br />Dönüştürün</h2>
+            <p className="section-subtitle">
+              Arka plan değişimi, renk düzeltme,
+              yapay zeka destekli iyileştirme ve daha fazlası.
+            </p>
           </div>
 
-          <div className="form-group">
-            <label className="form-label" htmlFor="edit-phone">Telefon</label>
-            <input
-              id="edit-phone"
-              className="form-input"
-              type="tel"
-              placeholder="0 (5XX) XXX XX XX"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-          </div>
-
-          <div className="form-group">
-            <label className="form-label" htmlFor="edit-subject">Konu</label>
-            <input
-              id="edit-subject"
-              className="form-input"
-              type="text"
-              placeholder="Örn: Arka plan değişimi"
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
-            />
-          </div>
-
-          <div className="form-group">
-            <label className="form-label" htmlFor="edit-desc">Açıklama</label>
-            <textarea
-              id="edit-desc"
-              className="form-textarea"
-              placeholder="Detaylı açıklama yazabilirsiniz..."
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="form-button"
-            disabled={loading}
-          >
-            {loading ? 'Gönderiliyor...' : 'Gönder'}
-          </button>
-
-          {message && (
-            <div className={`form-message ${message.type}`}>
-              {message.text}
+          <form className="form-card" onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label className="form-label" htmlFor="edit-name">Ad Soyad</label>
+              <input
+                id="edit-name"
+                className="form-input"
+                type="text"
+                placeholder="Adınız ve soyadınız"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+              />
             </div>
-          )}
-        </form>
+
+            <div className="form-group">
+              <label className="form-label" htmlFor="edit-phone">Telefon</label>
+              <input
+                id="edit-phone"
+                className="form-input"
+                type="tel"
+                placeholder="0 (5XX) XXX XX XX"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </div>
+
+            <div className="form-group">
+              <label className="form-label" htmlFor="edit-subject">Konu</label>
+              <input
+                id="edit-subject"
+                className="form-input"
+                type="text"
+                placeholder="Örn: Arka plan değişimi"
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+              />
+            </div>
+
+            <div className="form-group">
+              <label className="form-label" htmlFor="edit-desc">Açıklama</label>
+              <textarea
+                id="edit-desc"
+                className="form-textarea"
+                placeholder="Detaylı açıklama yazabilirsiniz..."
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="form-button"
+              disabled={loading}
+            >
+              {loading ? 'Gönderiliyor...' : 'Gönder'}
+            </button>
+
+            {message && (
+              <div className={`form-message ${message.type}`}>
+                {message.text}
+              </div>
+            )}
+          </form>
+        </div>
       </div>
     </section>
   );

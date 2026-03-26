@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import Portfolio from '@/components/Portfolio';
 import PhotoRequestForm from '@/components/PhotoRequestForm';
 import EditingRequestForm from '@/components/EditingRequestForm';
 import ContactForm from '@/components/ContactForm';
@@ -20,7 +21,7 @@ export default function Home() {
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
     revealElements.forEach((el) => revealObserver.observe(el));
 
@@ -31,7 +32,7 @@ export default function Home() {
     const handleScroll = () => {
       const scrollY = window.scrollY;
 
-      // Hero parallax — content moves up slower
+      // Hero parallax
       if (heroContent) {
         heroContent.style.transform = `translateY(${scrollY * 0.3}px)`;
         heroContent.style.opacity = Math.max(1 - scrollY / 600, 0);
@@ -59,28 +60,30 @@ export default function Home() {
       <Navbar />
       <Hero />
 
-      {/* Parallax divider 1 */}
+      <Portfolio />
+
+      {/* Parallax divider */}
       <div className="parallax-divider">
         <div className="parallax-divider-inner">
-          CAPTURE &nbsp; · &nbsp; CREATE &nbsp; · &nbsp; DELIVER &nbsp; · &nbsp; CAPTURE &nbsp; · &nbsp; CREATE &nbsp; · &nbsp; DELIVER
+          CAPTURE &nbsp; · &nbsp; CREATE &nbsp; · &nbsp; DELIVER &nbsp; · &nbsp; CAPTURE &nbsp; · &nbsp; CREATE
         </div>
       </div>
 
       <PhotoRequestForm />
 
-      {/* Parallax divider 2 */}
+      {/* Parallax divider */}
       <div className="parallax-divider">
         <div className="parallax-divider-inner">
-          EDIT &nbsp; · &nbsp; ENHANCE &nbsp; · &nbsp; TRANSFORM &nbsp; · &nbsp; EDIT &nbsp; · &nbsp; ENHANCE &nbsp; · &nbsp; TRANSFORM
+          EDIT &nbsp; · &nbsp; ENHANCE &nbsp; · &nbsp; TRANSFORM &nbsp; · &nbsp; EDIT &nbsp; · &nbsp; ENHANCE
         </div>
       </div>
 
       <EditingRequestForm />
 
-      {/* Parallax divider 3 */}
+      {/* Parallax divider */}
       <div className="parallax-divider">
         <div className="parallax-divider-inner">
-          CONNECT &nbsp; · &nbsp; COLLABORATE &nbsp; · &nbsp; INSPIRE &nbsp; · &nbsp; CONNECT &nbsp; · &nbsp; COLLABORATE &nbsp; · &nbsp; INSPIRE
+          CONNECT &nbsp; · &nbsp; COLLABORATE &nbsp; · &nbsp; INSPIRE &nbsp; · &nbsp; CONNECT
         </div>
       </div>
 

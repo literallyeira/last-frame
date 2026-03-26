@@ -23,6 +23,11 @@ export default function Navbar() {
 
       <ul className={`navbar-links${open ? ' open' : ''}`}>
         <li>
+          <a href="#portfolio" onClick={() => setOpen(false)}>
+            Portföy
+          </a>
+        </li>
+        <li>
           <a href="#galeri" onClick={() => setOpen(false)}>
             Galeri
           </a>

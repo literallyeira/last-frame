@@ -48,64 +48,67 @@ export default function ContactForm() {
   return (
     <section id="iletisim" className="section">
       <div className="section-container">
-        <div className="section-header reveal">
-          <span className="section-label">İletişim</span>
-          <h2 className="section-title">Bizimle<br />Konuşun</h2>
-          <p className="section-subtitle">
-            Soru, randevu veya işbirliği için bize ulaşın.
-          </p>
-        </div>
-
-        <form className="form-card reveal" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label className="form-label" htmlFor="contact-name">Ad Soyad</label>
-            <input
-              id="contact-name"
-              className="form-input"
-              type="text"
-              placeholder="Adınız ve soyadınız"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-            />
+        <div className="section-split reveal">
+          <div className="section-text-side">
+            <span className="section-label">İletişim</span>
+            <h2 className="section-title">Bizimle<br />Konuşun</h2>
+            <p className="section-subtitle">
+              Soru, randevu veya işbirliği için
+              bize ulaşın.
+            </p>
           </div>
 
-          <div className="form-group">
-            <label className="form-label" htmlFor="contact-phone">Telefon</label>
-            <input
-              id="contact-phone"
-              className="form-input"
-              type="tel"
-              placeholder="0 (5XX) XXX XX XX"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-          </div>
-
-          <div className="form-group">
-            <label className="form-label" htmlFor="contact-message">Mesaj</label>
-            <textarea
-              id="contact-message"
-              className="form-textarea"
-              placeholder="Mesajınızı buraya yazın..."
-              value={messageText}
-              onChange={(e) => setMessageText(e.target.value)}
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="form-button"
-            disabled={loading}
-          >
-            {loading ? 'Gönderiliyor...' : 'Gönder'}
-          </button>
-
-          {feedback && (
-            <div className={`form-message ${feedback.type}`}>
-              {feedback.text}
+          <form className="form-card" onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label className="form-label" htmlFor="contact-name">Ad Soyad</label>
+              <input
+                id="contact-name"
+                className="form-input"
+                type="text"
+                placeholder="Adınız ve soyadınız"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+              />
             </div>
-          )}
-        </form>
+
+            <div className="form-group">
+              <label className="form-label" htmlFor="contact-phone">Telefon</label>
+              <input
+                id="contact-phone"
+                className="form-input"
+                type="tel"
+                placeholder="0 (5XX) XXX XX XX"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </div>
+
+            <div className="form-group">
+              <label className="form-label" htmlFor="contact-message">Mesaj</label>
+              <textarea
+                id="contact-message"
+                className="form-textarea"
+                placeholder="Mesajınızı buraya yazın..."
+                value={messageText}
+                onChange={(e) => setMessageText(e.target.value)}
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="form-button"
+              disabled={loading}
+            >
+              {loading ? 'Gönderiliyor...' : 'Gönder'}
+            </button>
+
+            {feedback && (
+              <div className={`form-message ${feedback.type}`}>
+                {feedback.text}
+              </div>
+            )}
+          </form>
+        </div>
       </div>
     </section>
   );
