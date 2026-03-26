@@ -3,9 +3,21 @@ export default function Footer() {
 
   return (
     <footer className="footer">
-      <p>
-        © {year} <a href="#">Last Frame Studio</a>. Tüm hakları saklıdır.
-      </p>
+      <div className="footer-disclaimer">
+        (( Bu resmi bir GTA World websitesi değildir. Üçüncü parti yazılım. ))
+      </div>
+      <div className="footer-bottom">
+        <p>
+          © {year} <a href="#">Last Frame Studio</a>. Tüm hakları saklıdır.
+        </p>
+        <div className="footer-gtaw">
+          <img 
+            src="https://forum-tr.gta.world/uploads/monthly_2025_02/logo.png.3fe10156c1213bdb8f59cd9bc9e15781.png" 
+            alt="GTAW TR" 
+            className="footer-gtaw-logo"
+          />
+        </div>
+      </div>
     </footer>
   );
 }
