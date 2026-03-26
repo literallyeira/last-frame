@@ -47,10 +47,19 @@ CREATE TABLE IF NOT EXISTS admins (
   username TEXT UNIQUE NOT NULL,
   password_hash TEXT NOT NULL
 );
+-- Düzenleme Yanıtları (Ticket Sistemi)
+CREATE TABLE IF NOT EXISTS editing_responses (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  editing_request_id UUID NOT NULL REFERENCES editing_requests(id) ON DELETE CASCADE,
+  message TEXT NOT NULL,
+  photos TEXT[] DEFAULT '{}',
+  created_at TIMESTAMPTZ DEFAULT now()
+);
 
 -- RLS
 ALTER TABLE photo_requests ENABLE ROW LEVEL SECURITY;
 ALTER TABLE editing_requests ENABLE ROW LEVEL SECURITY;
+ALTER TABLE editing_responses ENABLE ROW LEVEL SECURITY;
 ALTER TABLE contact_messages ENABLE ROW LEVEL SECURITY;
 ALTER TABLE portfolio_items ENABLE ROW LEVEL SECURITY;
 ALTER TABLE admins ENABLE ROW LEVEL SECURITY;
@@ -58,11 +67,13 @@ ALTER TABLE admins ENABLE ROW LEVEL SECURITY;
 -- Anon INSERT
 CREATE POLICY "anon_insert_photo_requests" ON photo_requests FOR INSERT TO anon WITH CHECK (true);
 CREATE POLICY "anon_insert_editing_requests" ON editing_requests FOR INSERT TO anon WITH CHECK (true);
+CREATE POLICY "anon_insert_editing_responses" ON editing_responses FOR INSERT TO anon WITH CHECK (true);
 CREATE POLICY "anon_insert_contact_messages" ON contact_messages FOR INSERT TO anon WITH CHECK (true);
 
 -- Anon SELECT (galeri akışı - kullanıcı kendi talebini görebilmeli)
 CREATE POLICY "anon_select_photo_requests" ON photo_requests FOR SELECT TO anon USING (true);
 CREATE POLICY "anon_select_editing_requests" ON editing_requests FOR SELECT TO anon USING (true);
+CREATE POLICY "anon_select_editing_responses" ON editing_responses FOR SELECT TO anon USING (true);
 CREATE POLICY "anon_select_contact_messages" ON contact_messages FOR SELECT TO anon USING (true);
 
 -- Anon UPDATE (admin panel anon key üzerinden çalışıyor)

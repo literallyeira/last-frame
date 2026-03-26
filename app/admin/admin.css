@@ -334,3 +334,114 @@
   gap: 24px;
   margin-top: 24px;
 }
+
+/* ========== TICKET SYSTEM ========== */
+.ticket-card {
+  transition: all 0.3s ease;
+}
+
+.ticket-customer-msg {
+  background: rgba(134, 117, 106, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+}
+
+.ticket-msg-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted, #86868B);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.ticket-thread {
+  border-top: 1px solid var(--border);
+  margin-top: 16px;
+  padding-top: 20px;
+}
+
+.ticket-responses {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.ticket-response-item {
+  background: rgba(134, 117, 106, 0.08);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  border-left: 3px solid var(--accent);
+}
+
+.ticket-response-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.ticket-response-sender {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ticket-response-date {
+  font-size: 12px;
+  color: var(--text-muted, #86868B);
+}
+
+.ticket-response-body {
+  font-size: 14px;
+  color: var(--text-primary);
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.ticket-reply-form {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.ticket-reply-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.admin-textarea {
+  width: 100%;
+  padding: 14px 18px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  resize: vertical;
+  min-height: 100px;
+  line-height: 1.6;
+  transition: border-color 0.2s;
+}
+
+.admin-textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(134, 117, 106, 0.1);
+}
+
+.admin-button-small:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
