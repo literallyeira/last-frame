@@ -77,7 +77,7 @@ export default function ContactForm() {
                 id="contact-phone"
                 className="form-input"
                 type="tel"
-                placeholder="0 (5XX) XXX XX XX"
+                placeholder="000 000 00 00"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
               />
