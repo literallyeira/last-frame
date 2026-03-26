@@ -252,11 +252,19 @@ export default function AdminPage() {
                   {req.photos && req.photos.length > 0 && (
                     <div className="admin-links-list">
                       <div className="admin-label">Yüklenen Fotoğraflar:</div>
-                      {req.photos.map((link, i) => (
-                        <div key={i} className="admin-link-item">
-                          <a href={link} target="_blank" rel="noreferrer">{link}</a>
-                        </div>
-                      ))}
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(80px, 1fr))', gap: '12px' }}>
+                        {req.photos.map((link, i) => (
+                          <a 
+                            key={i} 
+                            href={link} 
+                            target="_blank" 
+                            rel="noreferrer"
+                            style={{ display: 'block', width: '100%', aspectRatio: '1', borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--border)' }}
+                          >
+                            <img src={link} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                          </a>
+                        ))}
+                      </div>
                     </div>
                   )}
 
@@ -306,11 +314,19 @@ export default function AdminPage() {
                   {req.result_photos && req.result_photos.length > 0 && (
                     <div className="admin-links-list">
                       <div className="admin-label">Sonuç Fotoğrafları:</div>
-                      {req.result_photos.map((link, i) => (
-                        <div key={i} className="admin-link-item">
-                          <a href={link} target="_blank" rel="noreferrer">{link}</a>
-                        </div>
-                      ))}
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(80px, 1fr))', gap: '12px' }}>
+                        {req.result_photos.map((link, i) => (
+                          <a 
+                            key={i} 
+                            href={link} 
+                            target="_blank" 
+                            rel="noreferrer"
+                            style={{ display: 'block', width: '100%', aspectRatio: '1', borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--border)' }}
+                          >
+                            <img src={link} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                          </a>
+                        ))}
+                      </div>
                     </div>
                   )}
 

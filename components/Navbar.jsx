@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useState } from 'react';
 
 export default function Navbar() {
@@ -7,9 +8,9 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
-      <a href="#" className="navbar-logo">
+      <Link href="/" className="navbar-logo">
         Last Frame <span>Studio</span>
-      </a>
+      </Link>
 
       <button
         className="navbar-hamburger"
@@ -23,14 +24,14 @@ export default function Navbar() {
 
       <ul className={`navbar-links${open ? ' open' : ''}`}>
         <li>
-          <a href="#portfolio" onClick={() => setOpen(false)}>
+          <Link href="/portfolio" onClick={() => setOpen(false)}>
             Portföy
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="#galeri" onClick={() => setOpen(false)}>
+          <Link href="/#galeri" onClick={() => setOpen(false)}>
             Galeri
-          </a>
+          </Link>
         </li>
         <li>
           <a href="#duzenleme" onClick={() => setOpen(false)}>

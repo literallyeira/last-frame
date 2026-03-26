@@ -1,0 +1,83 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import { supabase } from '@/lib/supabase';
+import './portfolio.css';
+
+export default function PortfolioPage() {
+  const [portfolioItems, setPortfolioItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      const { data } = await supabase
+        .from('portfolio_items')
+        .select('*')
+        .order('display_order', { ascending: true })
+        .order('created_at', { ascending: false });
+
+      if (data) setPortfolioItems(data);
+      setLoading(false);
+    };
+
+    fetchItems();
+    
+    // Smooth reveal effect on load
+    const timer = setTimeout(() => {
+      document.querySelectorAll('.reveal-on-load').forEach(el => el.classList.add('visible'));
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <>
+      <Navbar />
+      
+      <main className="portfolio-page">
+        <header className="portfolio-header-container reveal-on-load reveal" style={{ opacity: 0, transform: 'translateY(20px)', transition: 'all 0.8s ease' }}>
+          <h1 className="portfolio-hero-title">Tüm Çalışmalar</h1>
+          <p className="portfolio-hero-subtitle">
+            Stüdyomuzda çekilmiş, düzenlenmiş ve dijitalleştirilmiş tüm kareler bir arada. 
+            Sanatımızın tamamını burada keşfedebilirsiniz.
+          </p>
+        </header>
+
+        <section className="portfolio-masonry-container">
+          {loading ? (
+            <div style={{ textAlign: 'center', color: 'var(--text-muted)' }}>Yükleniyor...</div>
+          ) : portfolioItems.length === 0 ? (
+            <div style={{ textAlign: 'center', color: 'var(--text-muted)' }}>Henüz fotoğraf eklenmemiş.</div>
+          ) : (
+            <div className="portfolio-masonry-grid">
+              {portfolioItems.map((item, i) => (
+                <a
+                  key={item.id}
+                  href={item.image_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="portfolio-masonry-item reveal-on-load reveal"
+                  style={{
+                    opacity: 0, 
+                    transform: 'translateY(20px)', 
+                    transition: `all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) ${i * 0.05}s`
+                  }}
+                >
+                  <img src={item.image_url} alt={item.title || 'Portföy'} loading="lazy" />
+                  <div className="portfolio-masonry-overlay">
+                    {item.title && <div className="portfolio-masonry-title">{item.title}</div>}
+                    {item.category && <div className="portfolio-masonry-category">{item.category}</div>}
+                  </div>
+                </a>
+              ))}
+            </div>
+          )}
+        </section>
+      </main>
+
+      <Footer />
+    </>
+  );
+}

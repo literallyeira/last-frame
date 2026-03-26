@@ -1,0 +1,113 @@
+/* ========== PORTFOLIO PAGE ========== */
+
+.portfolio-page {
+  padding-top: 140px; /* Leave space for navbar */
+  padding-bottom: 100px;
+  background-color: var(--bg-primary);
+  min-height: 100vh;
+}
+
+.portfolio-header-container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 48px;
+  margin-bottom: 64px;
+  text-align: center;
+}
+
+.portfolio-hero-title {
+  font-size: clamp(48px, 8vw, 80px);
+  font-weight: 800;
+  letter-spacing: -3px;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  line-height: 1;
+}
+
+.portfolio-hero-subtitle {
+  font-size: 18px;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Masonry Grid for independent page */
+.portfolio-masonry-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.portfolio-masonry-grid {
+  columns: 3;
+  column-gap: 24px;
+}
+
+.portfolio-masonry-item {
+  display: block;
+  break-inside: avoid;
+  margin-bottom: 24px;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
+.portfolio-masonry-item img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.portfolio-masonry-item:hover img {
+  transform: scale(1.04);
+}
+
+.portfolio-masonry-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.portfolio-masonry-item:hover .portfolio-masonry-overlay { opacity: 1; }
+
+.portfolio-masonry-title {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.portfolio-masonry-category {
+  color: rgba(255,255,255,0.8);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .portfolio-masonry-grid { columns: 2; }
+}
+
+@media (max-width: 768px) {
+  .portfolio-header-container,
+  .portfolio-masonry-container { padding: 0 24px; }
+  
+  .portfolio-hero-title { letter-spacing: -1px; }
+}
+
+@media (max-width: 500px) {
+  .portfolio-masonry-grid { columns: 1; }
+}
