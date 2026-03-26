@@ -34,9 +34,6 @@ html {
 body {
   font-family: var(--font-family);
   background-color: var(--bg-primary);
-  background-image: url('/tesekkur_kart.png');
-  background-repeat: repeat;
-  background-blend-mode: multiply;
   color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;
