@@ -59,6 +59,12 @@ export default function EditingRequestForm() {
               Arka plan değişimi, renk düzeltme,
               yapay zeka destekli iyileştirme ve daha fazlası.
             </p>
+            <a href="#galeri" className="editing-cta-link">
+              <span>Talebinizi görüntüleyin</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
           </div>
 
           <form className="form-card" onSubmit={handleSubmit}>

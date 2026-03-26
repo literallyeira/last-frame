@@ -348,6 +348,32 @@ body {
   letter-spacing: -0.2px;
 }
 
+.editing-cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 28px;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  transition: var(--transition);
+  letter-spacing: -0.2px;
+}
+
+.editing-cta-link:hover {
+  color: var(--accent-hover);
+  transform: translateX(4px);
+}
+
+.editing-cta-link svg {
+  transition: transform 0.3s ease;
+}
+
+.editing-cta-link:hover svg {
+  transform: translateX(4px);
+}
+
 /* Old centered header (for portfolio) */
 .section-header {
   text-align: left;
