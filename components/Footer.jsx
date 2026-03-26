@@ -3,9 +3,6 @@ export default function Footer() {
 
   return (
     <footer className="footer">
-      <div className="footer-disclaimer">
-        (( Bu resmi bir GTA World websitesi değildir. Üçüncü parti yazılım. ))
-      </div>
       <div className="footer-bottom">
         <p>
           © {year} <a href="#">Last Frame Studio</a>. Tüm hakları saklıdır.
@@ -17,6 +14,9 @@ export default function Footer() {
             className="footer-gtaw-logo"
           />
         </div>
+      </div>
+      <div className="footer-disclaimer">
+        (( Bu site resmi bir GTA World web sitesi değildir. Üçüncü taraf bir yazılımdır. ))
       </div>
     </footer>
   );
